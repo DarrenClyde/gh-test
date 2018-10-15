@@ -1,25 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
+import Header from 'components/Header';
 import ActionPanel from 'components/ActionPanel';
+import ReposList from 'containers/ReposList';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="header">Github popular repos</header>
-        <main className="container">
-          <ActionPanel />
-          <div className="repos-list">
-            <ul>
-              <li>1</li>
-              <li>2</li>
-              <li>3</li>
-            </ul>
-          </div>
-        </main>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <Header title="Github popular repos" />
+    <main className="container">
+      <ActionPanel />
+      <ReposList />
+    </main>
+  </div>
+);
 
 export default App;
