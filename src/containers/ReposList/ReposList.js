@@ -16,7 +16,7 @@ class ReposList extends Component {
   renderList = (repos, licenseFilter, filter) => {
     if(licenseFilter === 'all' && !filter && repos.length < 1) {
       return <div className="loader"><HashLoader /></div>;
-    } else if((licenseFilter === 'all' || filter) && repos.length < 1) {
+    } else if(repos.length < 1) {
       return <Empty />;
     }
     return (
