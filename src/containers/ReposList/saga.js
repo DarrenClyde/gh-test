@@ -11,7 +11,7 @@ export function* loadRepos() {
   const url = `https://api.github.com/search/repositories?q=created:>${formattedDate}&sort=stars&order=desc`;
   try {
     const repos = yield call(request, url);
-    yield put(reposLoaded(repos));
+    yield put(reposLoaded(repos.items));
   } catch (err) {
     yield put(loadReposError(err));
   }

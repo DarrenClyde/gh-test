@@ -1,18 +1,28 @@
 import { createSelector } from 'reselect';
 
-const selectRepos = state => state.get('reposData');
+const selectReposData = state => state.get('reposData');
+
+export const getFilter = createSelector(
+  selectReposData,
+  reposState => reposState.get('filter')
+)
+
+const getRepos = createSelector(
+  selectReposData,
+  reposState => reposState.get('repos'),
+)
 
 export const getReposList = createSelector(
-  selectRepos,
-  reposState => reposState.get('repos')
+  [getRepos, getFilter],
+  (reposState, filter) => reposState.filter(({ full_name }) => new RegExp(filter, 'i').test(full_name))
 );
 
 export const getError = createSelector(
-  selectRepos,
+  selectReposData,
   reposState => reposState.get('error')
 );
 
 export const getLoadingStatus = createSelector(
-  selectRepos,
+  selectReposData,
   reposState => reposState.get('loading')
 );

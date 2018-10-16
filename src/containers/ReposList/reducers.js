@@ -1,10 +1,16 @@
-import { fromJS } from 'immutable';
-import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR } from './constants';
+import { Map } from 'immutable';
+import {
+  LOAD_REPOS,
+  LOAD_REPOS_SUCCESS,
+  LOAD_REPOS_ERROR,
+  REPOS_FILTER
+} from './constants';
 
-const initialState = fromJS({
+const initialState = Map({
   loading: false,
   error: false,
-  repos: null,
+  repos: [],
+  filter: '',
 });
 
 function appReducer(state = initialState, action) {
@@ -13,7 +19,7 @@ function appReducer(state = initialState, action) {
       return state
         .set('loading', true)
         .set('error', false)
-        .set('repos', null);
+        .set('repos', []);
     case LOAD_REPOS_SUCCESS:
       return state
         .set('repos', action.repos)
@@ -22,6 +28,9 @@ function appReducer(state = initialState, action) {
       return state
         .set('error', action.error)
         .set('loading', false);
+    case REPOS_FILTER:
+      return state
+        .set('filter', action.pattern);
     default:
       return state;
   }

@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { reposFilter } from 'containers/ReposList/actions';
+import { getFilter } from 'containers/ReposList/selectors';
 import './ActionPanel.css';
 
-export default class ActionPanel extends Component {
-  state = {
-    
+class ActionPanel extends Component {
+
+  onFilter = e => {
+    this.props.reposFilter(e.target.value);
   }
+
   render() {
     return (
       <div className="actionPanel">
@@ -14,9 +19,17 @@ export default class ActionPanel extends Component {
           <button>3</button>
         </div>
         <div className="search">
-          <input type="text" placeholer="Найти"/>
+          <input type="text" onChange={e => this.onFilter(e)} placeholer="Найти"/>
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    filter: getFilter(state),
+  }
+}
+
+export default connect(mapStateToProps, { reposFilter })(ActionPanel)
