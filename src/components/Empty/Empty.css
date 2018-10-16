@@ -1,0 +1,12 @@
+.empty {
+  text-align: center;
+}
+
+.empty-image {
+  width: 50px;
+}
+
+.empty-text {
+  font-size: 20px;
+  margin-top: 10px;
+}

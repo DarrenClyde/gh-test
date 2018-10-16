@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { HashLoader } from 'react-spinners';
-import { getReposList, getError, getLoadingStatus } from './selectors';
+import { getReposList, getError, getLoadingStatus, getFilter, getLicenseFilter } from './selectors';
 import { loadRepos } from './actions';
 import RepoItem from 'components/RepoItem';
+import Empty from 'components/Empty';
 import './ReposList.css';
 
 class ReposList extends Component {
@@ -12,17 +13,23 @@ class ReposList extends Component {
     this.props.loadRepos();
   }
 
-  render() {
-    const { repos } = this.props;
-    if(repos.length < 1) {
+  renderList = (repos, licenseFilter, filter) => {
+    if(licenseFilter === 'all' && !filter && repos.length < 1) {
       return <div className="loader"><HashLoader /></div>;
+    } else if((licenseFilter === 'all' || filter) && repos.length < 1) {
+      return <Empty />;
     }
-
     return (
       <ul className="repos-list">
         {repos.map((repo, idx) => <RepoItem key={idx} repo={repo} />)}
       </ul>
     )
+  }
+
+  render() {
+    const { repos, licenseFilter, filter } = this.props;
+
+    return this.renderList(repos, licenseFilter, filter);
   }
 }
 
@@ -31,6 +38,8 @@ const mapStateToProps = state => {
     repos: getReposList(state),
     error: getError(state),
     loading: getLoadingStatus(state),
+    licenseFilter: getLicenseFilter(state),
+    filter: getFilter(state),
   }
 }
 

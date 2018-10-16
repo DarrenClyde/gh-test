@@ -2,7 +2,11 @@ import {
   LOAD_REPOS,
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS_ERROR,
-  REPOS_FILTER
+  REPOS_FILTER,
+  LICENSE_LOAD,
+  LICENSE_LOAD_SUCCESS,
+  LICENSE_LOAD_ERROR,
+  LICENSE_FILTER
 } from './constants';
 
 export function loadRepos() {
@@ -29,5 +33,32 @@ export function reposFilter(pattern) {
   return {
     type: REPOS_FILTER,
     pattern,
+  }
+}
+
+export function loadLicense() {
+  return {
+    type: LICENSE_LOAD,
+  }
+}
+
+export function licenseLoaded(licenses) {
+  return {
+    type: LICENSE_LOAD_SUCCESS,
+    licenses,
+  }
+}
+
+export function licenseLoadError(error) {
+  return {
+    type: LICENSE_LOAD_ERROR,
+    error,
+  }
+}
+
+export function filterByLicense(licenseFilter) {
+  return {
+    type: LICENSE_FILTER,
+    licenseFilter,
   }
 }
