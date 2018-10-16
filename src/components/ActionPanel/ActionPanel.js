@@ -35,7 +35,7 @@ class ActionPanel extends Component {
           </select>
         </div>
         <div className="search">
-          <input type="text" onChange={this.onFilter} placeholder="Найти..."/>
+          <input className="field" type="text" onChange={this.onFilter} placeholder="Найти..."/>
         </div>
       </div>
     );

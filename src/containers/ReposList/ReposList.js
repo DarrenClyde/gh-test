@@ -20,9 +20,9 @@ class ReposList extends Component {
       return <Empty />;
     }
     return (
-      <ul className="repos-list">
+      <div className="repos-list">
         {repos.map((repo, idx) => <RepoItem key={idx} repo={repo} />)}
-      </ul>
+      </div>
     )
   }
 
